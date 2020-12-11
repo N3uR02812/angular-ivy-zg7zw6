@@ -1,0 +1,15 @@
+<div class="d-flex-container">
+  <div class="d-flex flex-column bg px-4 py-2 mt-auto mb-auto mr-auto ml-auto col-lg-3 col-md-6 col-sm-12">
+    <!-- <div class="mr-auto ml-auto">Logo</div> -->
+
+    <h2 class="mr-auto ml-auto">Registrierungscode bestätigen</h2>
+
+    <p class="mr-auto ml-auto" *ngIf="loading">Ihr Code wird geprüft..</p>
+    <p class="mr-auto ml-auto" *ngIf="!loading && notFound">Der Code ist ungültig!</p>
+
+    <div class="mr-auto ml-auto my-4" *ngIf="loading">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+
+  </div>
+</div>

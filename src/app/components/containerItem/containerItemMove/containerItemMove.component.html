@@ -1,0 +1,63 @@
+<div class="d-flex modal-header">
+  <h2 class="mx-auto my-auto" mat-dialog-title>
+    <ng-container *ngIf="target === 'container'">
+      Weise Container zu
+    </ng-container>
+    <ng-container *ngIf="target === 'category'">
+      Weise Kategorie zu
+    </ng-container>
+    <ng-container *ngIf="target === 'shoppingcart'">
+      Weise der Einkaufsliste zu
+    </ng-container>
+  </h2>
+</div>
+
+<mat-dialog-content class="mat-typography modal-content">
+  <div class="d-flex flex-column">
+    <ng-container *ngIf="target === 'container'">
+      <mat-form-field>
+        <mat-label>Container</mat-label>
+        <mat-select [(ngModel)]="item.Container" (ngModelChange)="item.ContainerId = $event.Id">
+          <mat-option [value]="null">-- Keine --</mat-option>
+          <mat-option *ngFor="let container of containers" [value]="container">
+            {{container.Name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="target === 'category'">
+      <mat-form-field>
+        <mat-label>Kategorie</mat-label>
+        <mat-select [(ngModel)]="item.Category" (ngModelChange)="item.CategoryId = $event.Id">
+          <mat-select-trigger>
+            <mat-icon [style.color]="item?.Category?.Color" matSuffix>{{item?.Category?.Logo}}</mat-icon>
+            {{item?.Category?.Name}}
+          </mat-select-trigger>
+          <mat-option [value]="null">-- Keine --</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            <mat-icon [style.color]="category.Color" class="pr-1">{{category?.Logo}}</mat-icon> {{category.Name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="target === 'shoppingcart'">
+      <div class="item-avatar mx-auto mt-1">
+        <ng-container *ngIf="item.Image; else elseTemplate">
+          <img mat-card-avatar [src]="item.Image | sanitizer">
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="mr-2 empty-avatar" mat-card-avatar></div>
+        </ng-template>
+      </div>
+      <h3 class="mx-auto mt-1">{{item.Name}}</h3>
+      <mat-form-field class="p-1 flex-grow-1">
+        <mat-label>{{item.AmountType || 'Anzahl'}}</mat-label>
+        <input type="number" matInput [(ngModel)]="item.CurrentAmount">
+      </mat-form-field>
+    </ng-container>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="modal-bottom">
+  <button mat-button mat-flat-button color="primary" [mat-dialog-close]="null">Abbrechen</button>
+  <button mat-button mat-flat-button color="accent" [mat-dialog-close]="item" cdkFocusInitial>Speichern</button>
+</mat-dialog-actions>

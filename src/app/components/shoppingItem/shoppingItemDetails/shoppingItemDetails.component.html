@@ -1,0 +1,49 @@
+<div class="d-flex">
+  <img mat-card-avatar *ngIf="item.Image" [src]="item.Image | sanitizer">
+  <h2 class="ml-1 my-auto" mat-dialog-title>
+    <ng-container *ngIf="isCreate; else h2Template">
+      Erstellen
+    </ng-container>
+    <ng-template #h2Template>
+      Bearbeiten {{item.Name}}
+    </ng-template>
+  </h2>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  <div class="d-flex flex-column mt-1">
+    <div class="item-avatar ml-auto mr-auto">
+      <ng-container *ngIf="item.Image; else elseTemplate">
+        <img mat-card-avatar (click)="fileInput.click()" [src]="item.Image | sanitizer">
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="mr-2 empty-avatar" (click)="fileInput.click()" mat-card-avatar></div>
+      </ng-template>
+      <input #fileInput type="file" (change)="fileChange($event)" style="display:none;" />
+    </div>
+    <mat-form-field class="p-1">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="item.Name">
+    </mat-form-field>
+    <div class="mt-1 d-flex flex-wrap flex-grow">
+      <mat-form-field class="p-1 flex-grow-1">
+        <mat-label>{{item.AmountType || 'Anzahl'}}</mat-label>
+        <input type="number" matInput [(ngModel)]="item.Amount">
+      </mat-form-field>
+    </div>
+    <div class="mt-1 d-flex flex-wrap flex-grow">
+      <mat-form-field class="p-1 flex-grow-1">
+        <mat-label>Anzahlart</mat-label>
+        <mat-select [(ngModel)]="item.AmountType">
+          <mat-option *ngFor="let amountType of amountTypes" [value]="amountType.value">
+            {{amountType.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-flat-button color="primary" [mat-dialog-close]="null">Abbrechen</button>
+  <button mat-button mat-flat-button color="accent" [mat-dialog-close]="item" cdkFocusInitial>Speichern</button>
+</mat-dialog-actions>

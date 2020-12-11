@@ -1,0 +1,74 @@
+<div class="d-flex options-row">
+  <!-- <mat-form-field class="searchInput">
+    <input type="text" matInput [(ngModel)]="searchText" (ngModelChange)="search()" placeholder="Search...">
+  </mat-form-field>
+  <mat-icon matSuffix>search</mat-icon> -->
+
+  <div class="ml-auto d-flex flex-nowrap">
+    <button mat-mini-fab color="warn" class="mr-1" (click)="reload()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <ng-template [ngTemplateOutlet]="bottomRightTemplate || defaultRightTemplate"></ng-template>
+  </div>
+</div>
+
+<mat-toolbar class="navbar" color="primary">
+  <mat-toolbar-row class="nav-row d-flex flex-fill p-0 justify-content-around align-content-stretch">
+    <!-- <span class="mr-2">{{(appService.Config | async)?.TITLE}}</span> -->
+    <!-- <ng-container [ngTemplateOutlet]="headerBtnTemplate"
+      [ngTemplateOutletContext]="{label: 'Container', logo: 'kitchen', path: '/container'}">
+    </ng-container> -->
+    <ng-container [ngTemplateOutlet]="headerBtnTemplate"
+      [ngTemplateOutletContext]="{label: 'Artikel', logo: 'restaurant', path: '/items'}">
+    </ng-container>
+    <ng-container [ngTemplateOutlet]="headerBtnTemplate"
+      [ngTemplateOutletContext]="{label: 'Einkaufsliste', logo: 'shopping_cart', path: '/shoppinglist'}">
+    </ng-container>
+    <!-- <ng-container [ngTemplateOutlet]="headerBtnTemplate"
+      [ngTemplateOutletContext]="{label: 'Categories', logo: 'label', path: '/categories'}">
+    </ng-container> -->
+    <!-- <ng-container [ngTemplateOutlet]="headerBtnTemplate"
+      [ngTemplateOutletContext]="{label: 'Groups', logo: 'group', path: '/groups'}">
+    </ng-container> -->
+    <button class="header-btn" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="'/container'">
+        <mat-icon>kitchen</mat-icon>
+        <span>Container</span>
+      </a>
+      <a mat-menu-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="'/categories'">
+        <mat-icon>label</mat-icon>
+        <span>Kategorien</span>
+      </a>
+      <a mat-menu-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      [routerLink]="'/groups'">
+        <mat-icon>group</mat-icon>
+        <span>Gruppen</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<ng-template #defaultLeftTemplate>
+  <!-- <p style="display: hidden;">L</p> -->
+</ng-template>
+
+<ng-template #defaultRightTemplate>
+  <!-- <p style="display: hidden;">R</p> -->
+</ng-template>
+
+<ng-template #headerBtnTemplate let-path="path" let-logo="logo" let-label="label">
+  <a class="header-btn" mat-button routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+    [routerLink]="[path]">
+    <div class="d-flex flex-column" style="height: 100%;">
+      <mat-icon class="w-100 header-btn-icon big-view" matSuffix> {{logo}} </mat-icon>
+      <small class="header-btn-label big-view"> {{label}} </small>
+
+      <mat-icon class="mt-auto mb-auto w-100 p-0 header-btn-icon small-view"> {{logo}} </mat-icon>
+    </div>
+  </a>
+</ng-template>

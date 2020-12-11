@@ -1,0 +1,26 @@
+<mat-list-option [value]="item" class="list-option" (swipeLeft)="swipe($event)" (swipeRight)="swipe($event)">
+  <div class="item-options-left" #optionsLeft [style.left]="optionsLeftOffset">
+    <ng-template [ngTemplateOutlet]="actionsLeftTemplate || defaultActionsLeftTemplate"
+      [ngTemplateOutletContext]="{item: item}"></ng-template>
+  </div>
+  <div class="d-flex flex-nowrap item" [ngClass]="{'openRight': showOptionsRight,'openLeft': showOptionsLeft}"
+    [style.marginRight]="marginRight" [style.marginLeft]="marginLeft">
+    <ng-template [ngTemplateOutlet]="contentTemplate || defaultContentTemplate"
+      [ngTemplateOutletContext]="{item: item}">
+    </ng-template>
+  </div>
+  <div class="item-options-right" #optionsRight [style.right]="optionsRightOffset">
+    <ng-template [ngTemplateOutlet]="actionsTemplate || defaultActionsTemplate"
+      [ngTemplateOutletContext]="{item: item}"></ng-template>
+    {{optionsRight?.width}}
+  </div>
+</mat-list-option>
+
+<ng-template #defaultContentTemplate let-item="item">
+</ng-template>
+
+<ng-template #defaultActionsTemplate let-item="item">
+</ng-template>
+
+<ng-template #defaultActionsLeftTemplate let-item="item">
+</ng-template>

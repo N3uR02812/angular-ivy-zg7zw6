@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import "../../../styles/colors.scss";
+@include mat-core();
+
+$primary: map-get($app-theme, primary);
+$secondary: map-get($app-theme, accent);
+
+.navbar {
+  //position: fixed;
+  z-index: 10;
+  width: 100%;
+  padding: 0;
+  height: 46px;
+  background-color: transparent;
+}
+
+.mat-toolbar-multiple-rows {
+  min-height: 0;
+}
+
+.header {
+  color: mat-contrast($primary, 900);
+  text-align: center;
+  margin: 0;
+}
+
+.label-row {
+  padding: 0;
+  height: 46px;
+  background-color: mat-color($primary, 800);
+}

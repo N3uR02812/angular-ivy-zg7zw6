@@ -1,0 +1,84 @@
+@import '~@angular/material/theming';
+@import "../../../styles/colors.scss";
+@include mat-core();
+
+$primary: map-get($app-theme, primary);
+$secondary: map-get($app-theme, accent);
+
+.navbar {
+  //position: fixed;
+  z-index: 10;
+  width: 100%;
+  padding: 0;
+  background-color: transparent;
+}
+
+::ng-deep .searchInput {
+  .mat-form-field-wrapper {
+    height: 64px;
+
+    .mat-form-field-underline {
+      bottom: 12px;
+    }
+  }
+}
+
+@media screen and (min-width: 598px) {
+  .big-view { display: block !important;}
+  .small-view{ display: none !important;}
+  .options-row {
+    bottom: 65px;
+  }
+}
+
+@media screen and (max-width: 598px) {
+  .big-view{ display: none !important;}
+  .small-view{ display: block !important;}
+  .options-row {
+    bottom: 56px;
+  }
+}
+
+.header-btn {
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  &.active {
+    background-color: mat-color($secondary, 400);
+  }
+}
+
+
+
+.header-btn-icon {
+  padding-top: 0.35rem;
+  font-size: 1.75rem;
+}
+
+.header-btn-label {
+  padding-top: 0.25rem;
+}
+
+.header {
+  color: mat-contrast($secondary, 900);
+  text-align: center;
+  margin: 0;
+}
+
+.options-row {
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  padding: 0 1rem 0.25rem 1rem;
+}
+
+.nav-row {
+  // backdrop-filter: blur(2px);
+  background-color: mat-color($secondary, 500);
+}
+
+.label-row {
+  padding: 0;
+  height: 46px;
+  background-color: mat-color($primary, 800);
+}

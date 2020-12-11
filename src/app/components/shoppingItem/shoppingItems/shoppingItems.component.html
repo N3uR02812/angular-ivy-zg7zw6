@@ -1,0 +1,48 @@
+<app-list 
+  [loadingFunction]="load()"
+  [contentTemplate]="content"
+  [actionsTemplate]="actions">
+</app-list>
+
+<ng-template #bottomActions>
+  <button mat-mini-fab class="mr-1" color="primary" (click)="toContainerItems()">
+    <mat-icon>playlist_add_check</mat-icon>
+  </button>
+  <button mat-mini-fab color="accent" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-template>
+
+
+<ng-template #actions let-item="item">
+  <button color="accent" mat-flat-button (click)="details(item)">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button color="warn" mat-flat-button (click)="remove(item)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #content let-item="item">
+  <div class="item-avatar ml-2 mr-1 mb-auto mt-auto">
+    <ng-container *ngIf="item.Image; else elseTemplate">
+      <img mat-card-avatar class="mr-2" [src]="item.Image | sanitizer">
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="mr-2 empty-avatar" mat-card-avatar></div>
+    </ng-template>
+    <ng-container *ngIf="item.Category !== null">
+      <div class="category-icon" [style.backgroundColor]="item.Category?.Color">
+        <mat-icon matSuffix>{{item.Category?.Logo}}</mat-icon>
+      </div>
+    </ng-container>
+  </div>
+  <div class="item-info d-flex flex-fill flex-column">
+    <h2 class="m-0 item-title">{{item.Name}}</h2>
+  </div>
+  <div class="item-amount ml-2 mb-auto mt-auto">
+    <p>{{item.Amount}} {{item.AmountType}}</p>
+  </div>
+  <mat-icon class="item-check ml-2 mr-3 mb-auto mt-auto" (click)="checkChange(item)">
+    {{item.IsChecked ? 'check_box': 'check_box_outline_blank'}}</mat-icon>
+</ng-template>

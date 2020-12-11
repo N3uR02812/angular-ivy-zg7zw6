@@ -1,0 +1,203 @@
+@import "styles/roboto/roboto.scss";
+@import "styles/colors.scss";
+@import "../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import "../node_modules/bootstrap/scss/utilities/sizing.scss";
+// @import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+
+$primary: map-get($app-theme, accent);
+$secondary: map-get($app-theme, primary);
+
+html,
+body {
+  height: 100%;
+  background-color: mat-color($secondary, 900);
+}
+
+.white-label {
+  color: mat-contrast($secondary, 900) !important
+}
+
+.mat-toolbar .mat-focused .mat-form-field-label {
+  color: transparent !important;
+}
+
+.mat-card-header-text {
+  margin: 0 !important;
+}
+
+.mat-card-avatar {
+  height: 2.5rem !important;
+  width: 2.5rem !important;
+  border-radius: 100% !important;
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row.display-flex>[class*="col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-actions .mat-button:first-child,
+.mat-card-actions .mat-raised-button:first-child,
+.mat-card-actions .mat-stroked-button:first-child {
+  margin: 0 4px;
+}
+
+.mat-card-actions .mat-button,
+.mat-card-actions .mat-raised-button,
+.mat-card-actions .mat-stroked-button {
+  margin: 0 4px;
+}
+
+.mat-button.mat-flat-button {
+  border-radius: 0px !important;
+}
+
+.mat-input-element {
+  color: mat-contrast($secondary, 900) !important
+}
+
+.mat-select-arrow-wrapper * {
+  color: mat-contrast($secondary, 700) !important
+}
+
+.mat-expansion-panel {
+
+  &,
+  & * {
+    background-color: mat-color($primary, 900) !important;
+    color: mat-contrast($primary, 900) !important
+  }
+}
+
+.mat-divider {
+  margin-left: 2rem;
+  background-color: mat-color($secondary, 700) !important;
+  color: mat-contrast($secondary, 700) !important
+}
+
+.mat-list-item {
+  background-color: mat-color($secondary, 900) !important;
+  color: mat-contrast($secondary, 900) !important
+}
+
+.mat-list-item-content {
+  padding: 0px !important;
+}
+
+.mat-list-text {
+  padding: 0px !important;
+}
+
+.mat-select-value-text {
+  color: mat-contrast($secondary, 900) !important
+}
+
+.mat-tab-label {
+  color: mat-contrast($secondary, 900) !important
+}
+
+.mat-form-field-label>* {
+  color: mat-color($secondary, 200) !important
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: mat-color($secondary, 200) !important
+}
+
+.mat-list-option {
+  background-color: mat-color($secondary, 900) !important;
+  color: mat-contrast($secondary, 900) !important
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-checkbox-frame {
+  border-color: mat-color($primary, 700) !important;
+}
+
+
+
+.mat-dialog-container {
+  border-radius: 0 !important;
+  background-color: mat-color($secondary, 800);
+  color: mat-contrast($secondary, 800) !important;
+  width: max-content!important;
+}
+
+@media (max-width: 599px) {
+  .mat-dialog-container {
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 100vw !important;
+    height: 100% !important;
+  }
+
+  // .mat-dialog-content {
+  //   max-height: unset !important;
+  //   height: calc(100% - 100px) !important;
+  // }
+}
+
+.category-icon {
+  border-radius: 100%;
+  position: absolute;
+  left: 2rem;
+  bottom: 0;
+  height: 1.6rem;
+  width: 1.6rem;
+
+  mat-icon {
+    color: mat-contrast($primary, 900);
+    font-size: 15px;
+    position: relative;
+    border-radius: 100%;
+    background: rgb(0 0 0 / 15%);
+    padding-top: 20%;
+    padding-left: 20%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.category-icon-large {
+  min-width: 2.5rem;
+
+  mat-icon {
+    color: #ffffff;
+    font-size: 1.5rem;
+    position: relative;
+    border-radius: 100%;
+    background: rgb(0 0 0 / 15%);
+    padding-top: 20%;
+    padding-left: 20%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.empty-avatar {
+  background-color: mat-color($secondary, 700);
+  min-width: 2.5rem;
+}

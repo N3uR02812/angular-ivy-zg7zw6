@@ -1,0 +1,50 @@
+// Import library functions for theme creation.
+@import "~@angular/material/theming";
+@import "../../../../styles/colors.scss";
+
+// Include non-theme styles for core.
+@include mat-core();
+
+$primary: map-get($app-theme, primary);
+
+.mat-list-item {
+    height: 58px !important;
+}
+
+.item {
+    position: relative;
+    white-space: nowrap;
+}
+
+.item-title {
+    max-width: 100%;
+    min-width: 0%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-info {
+    max-width: 100%;
+    min-width: 0%;
+}
+
+.item-amount {
+    text-align: end;
+    width: 8rem;
+}
+
+.item-options {
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.1s ease-in-out;
+    &.open {
+        visibility: visible;
+        width: 12rem;
+        opacity: 1;
+    }
+    button {
+        height: 58px;
+        border-radius: 0px;
+    }
+}

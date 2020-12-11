@@ -1,0 +1,14 @@
+// Import library functions for theme creation.
+@import '~@angular/material/theming';
+@import "../../../../styles/colors.scss";
+
+// Include non-theme styles for core.
+@include mat-core();
+
+$primary: map-get($app-theme, accent);
+$secondary: map-get($app-theme, primary);
+
+.mat-list-item {
+    background-color: mat-color($secondary, 800) !important;
+    color: mat-contrast($secondary, 900) !important
+}

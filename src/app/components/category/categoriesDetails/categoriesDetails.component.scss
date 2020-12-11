@@ -1,0 +1,17 @@
+.card {
+  @media screen and (min-width: 768px) {
+    width: 200px;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 32%;
+  }
+
+  width: 100%;
+
+  background-color: rgb(245, 245, 245);
+}
+
+.card-body {
+  padding: 10px;
+}

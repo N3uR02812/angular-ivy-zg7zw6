@@ -1,10 +1,12 @@
-import { Component, VERSION } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { UserService } from './services/userService';
 
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent  {
-  name = 'Angular ' + VERSION.major;
+export class AppComponent {
+  constructor(private userService: UserService) {
+  }
 }

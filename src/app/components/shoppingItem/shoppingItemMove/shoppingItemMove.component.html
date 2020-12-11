@@ -1,0 +1,37 @@
+<div class="d-flex flex-column">
+  <h2 class="mx-auto my-auto" mat-dialog-title>
+    Füge Einkaufsliste abschließen
+  </h2>
+  <p class="mt-4">Folgende Artikel werden in die Artikelliste hinzugefügt</p>
+</div>
+
+<mat-dialog-content class="mat-typography">
+  
+  <mat-list #itemList>
+    <mat-list-item *ngFor="let item of items">
+      <div class="item-avatar ml-2 mr-1 mb-auto mt-auto">
+        <ng-container *ngIf="item.Image; else elseTemplate">
+          <img mat-card-avatar class="mr-2" [src]="item.Image | sanitizer">
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="mr-2 empty-avatar" mat-card-avatar></div>
+        </ng-template>
+        <ng-container *ngIf="item.Category !== null">
+          <div class="category-icon" [style.backgroundColor]="item.Category?.Color">
+            <mat-icon matSuffix>{{item.Category?.Logo}}</mat-icon>
+          </div>
+        </ng-container>
+      </div>
+      <div class="item-info d-flex flex-fill flex-column">
+        <h2 class="m-0 item-title">{{item.Name}}</h2>
+      </div>
+      <div class="item-amount ml-2 mr-1 mb-auto mt-auto">
+        <p>{{item.Amount}} {{item.AmountType}}</p>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-flat-button color="primary" [mat-dialog-close]="null">Abbrechen</button>
+  <button mat-button mat-flat-button color="accent" [mat-dialog-close]="items" cdkFocusInitial>OK</button>
+</mat-dialog-actions>

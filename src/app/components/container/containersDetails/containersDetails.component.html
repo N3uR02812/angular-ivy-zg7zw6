@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>
+  <ng-container *ngIf="isCreate; else h2Template">
+    Erstellen
+  </ng-container>
+  <ng-template #h2Template>
+    Bearbeiten {{item.Name}}
+  </ng-template>
+</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="item.Name">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="item.Description"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-flat-button color="primary" mat-dialog-close>Abbrechen</button>
+  <button mat-button mat-flat-button color="accent" [mat-dialog-close]="item" cdkFocusInitial>Speichern</button>
+</mat-dialog-actions>
+

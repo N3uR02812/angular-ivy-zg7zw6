@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>
+  <ng-container *ngIf="isCreate; else h2Template">
+    Create
+  </ng-container>
+  <ng-template #h2Template>
+    Bearbeiten {{item.Name}}
+  </ng-template>
+</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-md-12 d-flex flex-column">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="item.Name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="item.Description"></textarea>
+      </mat-form-field>
+
+      <mat-label>Users</mat-label>
+      <mat-form-field>
+        <mat-chip-list #userList aria-label="Users">
+          <mat-chip *ngFor="let userMail of item.userMails" [selectable]="true" [removable]="true"
+            (removed)="remove(userMail)">
+            {{userMail}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Users..." [matChipInputFor]="userList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-flat-button color="primary" mat-dialog-close>Abbrechen</button>
+  <button mat-button mat-flat-button color="accent" [mat-dialog-close]="item" cdkFocusInitial>Speichern</button>
+</mat-dialog-actions>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="checkState != checkStateEnum.OpenApp; else elseTemplate">
+    <div class="d-flex flex-column h-100">
+        <img #logo class="logo mx-auto mt-auto" [ngClass]="{'in': checkState === checkStateEnum.Checking, 'out': checkState === checkStateEnum.Checkfinished}" src="../../../assets/logo.svg">
+        <div class="mx-auto my-4 mb-auto">
+            <p class="title" [ngClass]="{'in': checkState === checkStateEnum.Checking, 'out': checkState === checkStateEnum.Checkfinished}">Food Planer</p>
+        </div> 
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <app-header></app-header>
+
+    <div class="content">
+        <div class="scroll-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <app-bottom></app-bottom>
+</ng-template>

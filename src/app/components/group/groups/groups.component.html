@@ -1,0 +1,72 @@
+<div class="list-header d-flex flex-fill justify-content-center">
+  <h3 class="m-0 item-title d-flex">
+    <mat-icon class="mr-1" matSuffix>house</mat-icon> Meine Gruppen
+  </h3>
+</div>
+<mat-divider></mat-divider>
+
+<app-list [loadingFunction]="load()" [contentTemplate]="content" [actionsTemplate]="actions">
+</app-list>
+
+<div class="list-header d-flex flex-fill justify-content-center">
+  <h3 class="m-0 item-title d-flex">
+    <mat-icon class="mr-1" matSuffix>group_add</mat-icon> Mitglied in Gruppen
+  </h3>
+</div>
+<mat-divider></mat-divider>
+
+<app-list [loadingFunction]="loadMember()" [contentTemplate]="contentMember"
+  [actionsTemplate]="actionsMember">
+</app-list>
+
+<ng-template #actions let-item="item">
+  <button color="accent" mat-flat-button (click)="details(item)">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button color="warn" mat-flat-button (click)="remove(item)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #actionsMember let-item="item">
+  <button color="warn" mat-flat-button (click)="remove(item)">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button color="primary" mat-flat-button (click)="setActiveGroup(item)">
+    <mat-icon>group_add</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #bottomActions>
+  <button mat-mini-fab color="accent" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #contentMember let-item="item">
+  <div class="item-avatar ml-2 mr-2 mb-auto mt-auto">
+    <div class="mr-2 category-icon-large" mat-card-avatar>
+      <mat-icon matSuffix>group_add</mat-icon>
+    </div>
+  </div>
+  <div class="item-info d-flex flex-fill flex-column">
+    <h2 class="m-0 item-title">{{item.Name}}</h2>
+    <small class="item-title" *ngIf="item.Description">
+      {{item.Description}}
+    </small>
+  </div>
+</ng-template>
+
+<ng-template #content let-item="item">
+  <div class="item-avatar ml-2 mr-2 mb-auto mt-auto">
+    <div class="mr-2 category-icon-large" mat-card-avatar>
+      <mat-icon matSuffix>house</mat-icon>
+    </div>
+  </div>
+  <div class="item-info d-flex flex-fill flex-column">
+    <h2 class="m-0 item-title">{{item.Name}}</h2>
+    <small class="item-title" *ngIf="item.Description">
+      {{item.Description}}
+    </small>
+  </div>
+</ng-template>

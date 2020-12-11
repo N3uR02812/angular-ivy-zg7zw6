@@ -1,0 +1,56 @@
+@import "../../../styles/colors.scss";
+$primary: map-get($app-theme, primary);
+$secondary: map-get($app-theme, accent);
+$header1: 46px;
+$bottom: 64px;
+$bottom_sm: 56px;
+
+.content {
+
+  @media screen and (max-width: 598px) {
+    height: calc(100% - #{$header1 + $bottom_sm});
+  }
+
+  position: relative;
+  overflow: auto;
+  height: calc(100% - #{$header1 + $bottom});
+
+}
+
+.logo {
+  opacity: 0;
+  width: 2rem;
+  transition: all 0.75s ease-out;
+
+  &.in {
+    opacity: 1;
+    width: 6.5rem;
+  }
+
+  &.out {
+    opacity: 0;
+    width: 8.5rem;
+    transition: all 0.55s ease-out;
+  }
+}
+
+.title {
+  opacity: 0;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+  transition: all 0.75s ease-out;
+
+  &.in {
+    opacity: 1;
+  }
+
+  &.out {
+    opacity: 0;
+    transition: all 0.55s ease-out;
+  }
+}
+
+.scroll-content {
+  padding-bottom: 50px;
+}

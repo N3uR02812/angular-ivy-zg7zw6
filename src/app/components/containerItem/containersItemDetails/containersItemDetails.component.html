@@ -1,0 +1,78 @@
+<div class="d-flex modal-header">
+  <h2 class="mx-auto my-auto" mat-dialog-title>
+    <ng-container *ngIf="isCreate; else h2Template">
+      Erstellen
+    </ng-container>
+    <ng-template #h2Template>
+      Bearbeiten {{item.Name}}
+    </ng-template>
+  </h2>
+</div>
+
+<mat-dialog-content class="mat-typography modal-content">
+  <ng-container *ngIf="useCode; else elseTemplate">
+    <div class="d-flex">
+      <mat-form-field>
+        <mat-label>Kamera</mat-label>
+        <mat-select [(value)]="currentDevice">
+          <mat-option *ngFor="let device of availableDevices" [value]="device">
+            {{device.label}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="ml-2">
+        <mat-label>Ean</mat-label>
+        <textarea matInput [(ngModel)]="ean"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="d-flex">
+      <zxing-scanner style="width: 50%;" class="ml-auto mr-auto" [torch]="torchEnabled" [(device)]="currentDevice"
+        (scanSuccess)="onCodeResult($event)" [formats]="formatsEnabled" [tryHarder]="tryHarder"
+        (permissionResponse)="onHasPermission($event)" (camerasFound)="onCamerasFound($event)"
+        (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+    </div>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="d-flex flex-column mt-1">
+      <div class="item-avatar ml-auto mr-auto">
+        <ng-container *ngIf="item.Image; else elseTemplate">
+          <img mat-card-avatar (click)="fileInput.click()" [src]="item.Image | sanitizer">
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="mr-2 empty-avatar" (click)="fileInput.click()" mat-card-avatar></div>
+        </ng-template>
+        <input #fileInput type="file" (change)="fileChange($event)" style="display:none;" />
+      </div>
+      <mat-form-field class="p-1">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="item.Name">
+      </mat-form-field>
+      <div class="mt-1 d-flex flex-wrap flex-grow">
+        <mat-form-field class="p-1 flex-grow-1">
+          <mat-label>{{item.AmountType || 'Anzahl'}}</mat-label>
+          <input type="number" matInput [(ngModel)]="item.CurrentAmount" (ngModelChange)="amountChange($event)">
+        </mat-form-field>
+        <mat-form-field class="p-1 flex-grow-1" *ngIf="!isCreate">
+          <mat-label>{{item.AmountType || 'Anzahl'}} (Max)</mat-label>
+          <input type="number" matInput [(ngModel)]="item.Amount">
+        </mat-form-field>
+      </div>
+      <div class="mt-1 d-flex flex-wrap flex-grow">
+        <mat-form-field class="p-1 flex-grow-1">
+          <mat-label>Anzahlart</mat-label>
+          <mat-select [(ngModel)]="item.AmountType">
+            <mat-option *ngFor="let amountType of amountTypes" [value]="amountType.value">
+              {{amountType.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="modal-bottom">
+  <button mat-button mat-flat-button color="primary" [mat-dialog-close]="null">Abbrechen</button>
+  <button mat-button mat-flat-button color="accent" [mat-dialog-close]="item" cdkFocusInitial>Speichern</button>
+</mat-dialog-actions>

@@ -1,0 +1,82 @@
+<app-list [loadingFunction]="load()" [filterTemplate]="filterTemplate" [contentTemplate]="content"
+  [actionsLeftTemplate]="actionsLeft" [actionsTemplate]="actions">
+</app-list>
+
+<ng-template #actions let-item="item">
+  <button color="primary" mat-flat-button (click)="moveTo(item, 'shoppingcart')">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  <button color="accent" mat-flat-button (click)="details(item)">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button color="warn" mat-flat-button (click)="remove(item)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #actionsLeft let-item="item">
+  <button color="primary" mat-flat-button (click)="moveTo(item, 'container')">
+    <mat-icon>kitchen</mat-icon>
+  </button>
+  <button color="primary" mat-flat-button (click)="moveTo(item, 'category')">
+    <mat-icon>label</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #content let-item="item">
+  <div class="item-avatar ml-2 mr-1 mb-auto mt-auto">
+    <ng-container *ngIf="item.Image; else elseTemplate">
+      <img mat-card-avatar class="mr-2" [src]="item.Image | sanitizer">
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="mr-2 empty-avatar" mat-card-avatar></div>
+    </ng-template>
+    <ng-container *ngIf="item.Category !== null">
+      <div class="category-icon" [style.backgroundColor]="item.Category?.Color">
+        <mat-icon matSuffix>{{item.Category?.Logo}}</mat-icon>
+      </div>
+    </ng-container>
+  </div>
+  <div class="item-info d-flex flex-fill flex-column">
+    <h2 class="m-0 item-title">{{item.Name}}</h2>
+    <small *ngIf="item.ExpireDate">
+      Verfällt am: {{item.ExpireDate | date:'dd.MM.yyyy'}}
+    </small>
+  </div>
+  <div class="item-amount mx-2 mb-auto mt-auto">
+    <p>{{item.CurrentAmount}} / {{item.Amount}} {{item.AmountType}}</p>
+  </div>
+</ng-template>
+
+<ng-template #bottomActions>
+  <!-- <button mat-mini-fab color="accent" class="mr-1" (click)="add(true)">
+    <mat-icon>qr_code_scanner</mat-icon>
+  </button> -->
+  <button mat-mini-fab color="accent" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #filterTemplate>
+  <div class="d-flex flex-fill flex-wrap w-100 py-1">
+    <h1 class="white-label my-auto"> Filter: </h1>
+    <mat-form-field class="ml-3">
+      <mat-label>Container</mat-label>
+      <mat-select [(value)]="containerId" (selectionChange)="setFilter()">
+        <mat-option>keine</mat-option>
+        <mat-option *ngFor="let cont of containers" [value]="cont._id">{{cont?.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="ml-3">
+      <mat-label>Kategorie</mat-label>
+      <mat-select [(value)]="categoryId" (selectionChange)="setFilter()">
+        <mat-option>keine</mat-option>
+        <mat-option *ngFor="let cat of categories" [value]="cat._id">{{cat?.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="ml-3">
+      <mat-label>Suchen</mat-label>
+      <input matInput [(ngModel)]="searchString" (ngModelChange)="setFilter()">
+    </mat-form-field>
+  </div>
+</ng-template>

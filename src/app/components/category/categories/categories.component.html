@@ -1,0 +1,37 @@
+<app-list 
+  [loadingFunction]="load()"
+  [contentTemplate]="content"
+  [actionsTemplate]="actions">
+</app-list>
+
+<ng-template #actions let-item="item">
+  <button color="primary" [routerLink]="['/items']" [queryParams]="{category: item.Id}" mat-flat-button>
+    <mat-icon>restaurant</mat-icon>
+  </button>
+  <button color="accent" mat-flat-button (click)="details(item)">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button color="warn" mat-flat-button (click)="remove(item)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #bottomActions>
+  <button mat-mini-fab color="accent" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #content let-item="item">
+  <div class="item-avatar ml-2 mr-2 mb-auto mt-auto">
+    <div class="mr-2 category-icon-large" [style.backgroundColor]="item.Color" mat-card-avatar>
+      <mat-icon matSuffix>{{item.Logo}}</mat-icon>
+    </div>
+  </div>
+  <div class="item-info d-flex flex-fill flex-column">
+    <h2 class="m-0 item-title">{{item.Name}}</h2>
+    <small class="item-title" *ngIf="item.Description">
+      {{item.Description}}
+    </small>
+  </div>
+</ng-template>
