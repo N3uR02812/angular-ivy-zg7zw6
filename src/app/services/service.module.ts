@@ -1,5 +1,5 @@
 import { Injectable, NgModule, SkipSelf, Optional, InjectionToken } from '@angular/core';
-import { BasicService } from './BasicService';
+import { BasicService } from './basicService';
 import { ContainerItemsService } from './containerItemsService';
 import { CategoryService } from './categoryService';
 import { ContainerService } from './containerService';
